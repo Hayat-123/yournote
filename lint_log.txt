@@ -1,0 +1,19 @@
+
+> yournote@0.1.0 lint
+> next lint
+
+
+./app/notes/page.tsx
+39:6  Warning: React Hook useEffect has a missing dependency: 'selectedNote'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+47:17  Error: 'newId' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+75:6  Warning: React Hook useEffect has a missing dependency: 'selectedNote'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/app-sidebar.tsx
+5:10  Error: 'cn' is defined but never used.  @typescript-eslint/no-unused-vars
+11:34  Error: 'Search' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/hero-section.tsx
+75:24  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+113:20  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules

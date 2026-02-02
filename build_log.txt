@@ -1,0 +1,67 @@
+
+> yournote@0.1.0 build
+> next build
+
+  ▲ Next.js 15.0.0
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/7) ...
+
+Error occurred prerendering page "/_not-found". Read more: https://nextjs.org/docs/messages/prerender-error
+
+FirebaseError: Firebase: Error (auth/invalid-api-key).
+    at y (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:6679)
+    at v (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:6727)
+    at i.instanceFactory (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:60884)
+    at a.getOrInitializeService (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:5:61111)
+    at a.initialize (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:5:60519)
+    at eU (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:44638)
+    at tx (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:61553)
+    at 20902 (C:\Users\hayat\Desktop\yournote\.next\server\app\_not-found\page.js:1:3197)
+    at t (C:\Users\hayat\Desktop\yournote\.next\server\webpack-runtime.js:1:128)
+    at 70209 (C:\Users\hayat\Desktop\yournote\.next\server\app\_not-found\page.js:1:2619)
+
+Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
+
+FirebaseError: Firebase: Error (auth/invalid-api-key).
+    at y (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:6679)
+    at v (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:6727)
+    at i.instanceFactory (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:60884)
+    at a.getOrInitializeService (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:5:61111)
+    at a.initialize (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:5:60519)
+    at eU (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:44638)
+    at tx (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:61553)
+    at 20902 (C:\Users\hayat\Desktop\yournote\.next\server\app\page.js:9:5030)
+    at t (C:\Users\hayat\Desktop\yournote\.next\server\webpack-runtime.js:1:128)
+    at 70209 (C:\Users\hayat\Desktop\yournote\.next\server\app\page.js:1:3118)
+Failed to build /_not-found/page: /_not-found after 1 attempts.
+Failed to build /page: / after 1 attempts.
+Failed to build /notes/page: /notes after 1 attempts.
+
+Error occurred prerendering page "/notes". Read more: https://nextjs.org/docs/messages/prerender-error
+
+FirebaseError: Firebase: Error (auth/invalid-api-key).
+    at y (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:6679)
+    at v (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:6727)
+    at i.instanceFactory (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:60884)
+    at a.getOrInitializeService (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:5:61111)
+    at a.initialize (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:5:60519)
+    at eU (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:44638)
+    at tx (C:\Users\hayat\Desktop\yournote\.next\server\chunks\730.js:19:61553)
+    at 20902 (C:\Users\hayat\Desktop\yournote\.next\server\app\notes\page.js:88:71342)
+    at t (C:\Users\hayat\Desktop\yournote\.next\server\webpack-runtime.js:1:128)
+    at 70209 (C:\Users\hayat\Desktop\yournote\.next\server\app\notes\page.js:88:51649)
+
+> Build error occurred
+Error: Export encountered an error on /_not-found/page: /_not-found, exiting the build.
+    at exportPageWithRetry (C:\Users\hayat\Desktop\yournote\node_modules\next\dist\export\worker.js:289:31)
+    at async Promise.all (index 3)
+    at async C:\Users\hayat\Desktop\yournote\node_modules\next\dist\export\worker.js:319:35
+    at async Object.exportPages (C:\Users\hayat\Desktop\yournote\node_modules\next\dist\export\worker.js:314:5) {
+  type: 'ExportPageError',
+  code: 'NEXT_EXPORT_PAGE_ERROR'
+}
