@@ -12,7 +12,7 @@ import {
   serverTimestamp,
   Timestamp,
 } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 export interface Note {
   id: string;
@@ -51,21 +51,7 @@ export async function deleteNote(noteId: string) {
   await deleteDoc(doc(db, NOTES_COLLECTION, noteId));
 }
 
-export async function uploadImage(file: File, userId: string, noteId: string): Promise<string> {
-  const storageRef = ref(storage, `users/${userId}/images/${Date.now()}_${file.name}`);
-  await uploadBytes(storageRef, file);
-  const imageUrl = await getDownloadURL(storageRef);
 
-  // Save metadata to images collection
-  await addDoc(collection(db, IMAGES_COLLECTION), {
-    noteId,
-    userId,
-    imageUrl,
-    createdAt: serverTimestamp(),
-  });
-
-  return imageUrl;
-}
 
 export function subscribeToNotes(userId: string, callback: (notes: Note[]) => void) {
   const q = query(

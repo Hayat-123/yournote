@@ -48,8 +48,8 @@ export default function HeroSection() {
                   preset="fade-in-blur"
                   speedSegment={0.3}
                   as="h1"
-                  className="mt-8 max-w-2xl text-balance text-5xl font-medium md:text-6xl lg:mt-16">
-                  Build and Ship 10x faster with NS
+                  className="mt-8 max-w-3xl text-balance text-5xl font-bold tracking-tight md:text-6xl lg:mt-16 text-black dark:text-white">
+                  🔥 Forge Smarter Notes. Code Better.
                 </TextEffect>
                 <TextEffect
                   per="line"
@@ -57,8 +57,8 @@ export default function HeroSection() {
                   speedSegment={0.3}
                   delay={0.5}
                   as="p"
-                  className="mt-8 max-w-2xl text-pretty text-lg">
-                  Tailwindcss highly customizable components for building modern websites and applications that look and feel the way you mean it.
+                  className="mt-8 max-w-2xl text-pretty text-lg text-stone-600 dark:text-stone-400">
+                  Supercharge your workflow with NoteForge — the smartest way to capture, organize, and link dev notes, code snippets, and technical insights.
                 </TextEffect>
 
                 <AnimatedGroup
@@ -81,22 +81,12 @@ export default function HeroSection() {
                     <Button
                       asChild
                       size="lg"
-                      className="rounded-xl px-5 text-base">
-                      <Link href="#link">
-                        <span className="text-nowrap">Start Building</span>
+                      className="rounded-full px-8 text-base font-semibold bg-black text-white hover:bg-stone-800 h-12">
+                      <Link href="/notes">
+                        <span className="text-nowrap">Start Forging</span>
                       </Link>
                     </Button>
                   </div>
-                  <Button
-                    key={2}
-                    asChild
-                    size="lg"
-                    variant="ghost"
-                    className="h-10.5 rounded-xl px-5 text-base">
-                    <Link href="#link">
-                      <span className="text-nowrap">Request a demo</span>
-                    </Link>
-                  </Button>
                 </AnimatedGroup>
               </div>
             </div>
@@ -117,14 +107,14 @@ export default function HeroSection() {
                 <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-5xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
                   <Image
                     className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
-                    src="/mail2.png"
+                    src="/app-screenshot.png"
                     alt="app screen"
                     width="2700"
                     height="1440"
                   />
                   <Image
                     className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
-                    src="/mail2-light.png"
+                    src="/app-screenshot.png"
                     alt="app screen"
                     width="2700"
                     height="1440"

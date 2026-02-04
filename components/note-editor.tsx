@@ -2,12 +2,12 @@
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
+
 import { useEffect, useState } from "react";
-import { Note, updateNote, uploadImage } from "@/lib/db";
+import { Note, updateNote } from "@/lib/db";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { ImageIcon, Loader2, Save, Trash2, Bold, Italic, List, ListOrdered } from "lucide-react";
+import { Loader2, Save, Trash2, Bold, Italic, List, ListOrdered } from "lucide-react";
 import { deleteNote } from "@/lib/db";
 
 interface NoteEditorProps {
@@ -19,10 +19,9 @@ interface NoteEditorProps {
 export function NoteEditor({ note, userId, onDelete }: NoteEditorProps) {
   const [title, setTitle] = useState(note.title);
   const [isSaving, setIsSaving] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
 
   const editor = useEditor({
-    extensions: [StarterKit, Image],
+    extensions: [StarterKit],
     content: note.content,
     editorProps: {
       attributes: {
@@ -59,21 +58,7 @@ export function NoteEditor({ note, userId, onDelete }: NoteEditorProps) {
     }
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && editor) {
-      setIsUploading(true);
-      try {
-        const url = await uploadImage(file, userId, note.id);
-        editor.chain().focus().setImage({ src: url }).run();
-      } catch (error) {
-        console.error("Image upload failed", error);
-        alert("Failed to upload image");
-      } finally {
-        setIsUploading(false);
-      }
-    }
-  };
+
 
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this note?")) {
@@ -111,20 +96,7 @@ export function NoteEditor({ note, userId, onDelete }: NoteEditorProps) {
             </Button>
           </div>
 
-          <label htmlFor="image-upload" className="cursor-pointer">
-            <Button variant="outline" size="icon" asChild disabled={isUploading}>
-              <span>
-                {isUploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ImageIcon className="h-4 w-4" />}
-              </span>
-            </Button>
-            <input
-              id="image-upload"
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={handleImageUpload}
-            />
-          </label>
+
           <Button onClick={handleSave} disabled={isSaving}>
             {isSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
             <span className="ml-2 hidden sm:inline">Save</span>

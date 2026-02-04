@@ -1,18 +1,13 @@
 'use client'
 import Link from 'next/link'
 import { Logo } from '@/components/logo'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Github, Moon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { useScroll } from 'motion/react'
 
-const menuItems = [
-    { name: 'Features', href: '#link' },
-    { name: 'Solution', href: '#link' },
-    { name: 'Pricing', href: '#link' },
-    { name: 'About', href: '#link' },
-]
+const menuItems: { name: string; href: string }[] = []
 
 export const HeroHeader = () => {
     const [menuState, setMenuState] = React.useState(false)
@@ -51,17 +46,7 @@ export const HeroHeader = () => {
                             </button>
 
                             <div className="hidden lg:block">
-                                <ul className="flex gap-8 text-sm">
-                                    {menuItems.map((item, index) => (
-                                        <li key={index}>
-                                            <Link
-                                                href={item.href}
-                                                className="text-muted-foreground hover:text-accent-foreground block duration-150">
-                                                <span>{item.name}</span>
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
+                                {/* Empty for now as per design */}
                             </div>
                         </div>
 
@@ -79,19 +64,29 @@ export const HeroHeader = () => {
                                     ))}
                                 </ul>
                             </div>
-                            <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+                            <div className="flex w-full flex-col items-center space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+                                <Link href="#" className="text-muted-foreground hover:text-foreground">
+                                    <Github className="h-5 w-5" />
+                                </Link>
+                                <button className="text-muted-foreground hover:text-foreground">
+                                    <Moon className="h-5 w-5" />
+                                </button>
                                 <Button
                                     asChild
-                                    variant="outline"
-                                    size="sm">
-                                    <Link href="#">
+                                    variant="ghost"
+                                    size="sm"
+                                    className="text-base font-medium"
+                                >
+                                    <Link href="/login">
                                         <span>Login</span>
                                     </Link>
                                 </Button>
                                 <Button
                                     asChild
-                                    size="sm">
-                                    <Link href="#">
+                                    size="sm"
+                                    className="bg-black text-white hover:bg-stone-800 rounded-md px-6"
+                                >
+                                    <Link href="/login">
                                         <span>Sign Up</span>
                                     </Link>
                                 </Button>
