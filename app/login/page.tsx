@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,15 +11,32 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Check for signup mode from URL query parameter
+  useEffect(() => {
+    const mode = searchParams.get("mode");
+    if (mode === "signup") {
+      setIsLogin(false);
+    }
+  }, [searchParams]);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
+
+    // Validate passwords match for sign up
+    if (!isLogin && password !== confirmPassword) {
+      setError("Passwords do not match. Please try again.");
+      setIsLoading(false);
+      return;
+    }
 
     try {
       if (isLogin) {
@@ -27,7 +44,8 @@ export default function LoginPage() {
       } else {
         await createUserWithEmailAndPassword(auth, email, password);
       }
-      setIsLoading(false);
+      // Redirect to notes page after successful authentication
+      router.push("/notes");
     } catch (err: any) {
       console.error(err);
       if (err.code === "auth/invalid-credential" || err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
@@ -37,12 +55,17 @@ export default function LoginPage() {
           setError("Invalid credentials. Please check your email and use a password with at least 6 characters.");
         }
       } else if (err.code === "auth/email-already-in-use") {
-        setError("This email is already registered. Please login instead.");
+        // Auto-switch to login mode when email already exists
+        setIsLogin(true);
+        setError("This email is already registered. Switched to login mode - enter your password to sign in.");
+      } else if (err.code === "auth/weak-password") {
+        setError("Password is too weak. Please use at least 6 characters.");
       } else if (err instanceof Error) {
         setError(err.message);
       } else {
         setError("An unknown error occurred");
       }
+    } finally {
       setIsLoading(false);
     }
   };
@@ -51,9 +74,11 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-screen bg-stone-50">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>{isLogin ? "Login" : "Sign Up"}</CardTitle>
+          <CardTitle>{isLogin ? "Welcome Back" : "Create an Account"}</CardTitle>
           <CardDescription>
-            {isLogin ? "Enter your credentials to access your notes." : "Create an account to get started."}
+            {isLogin
+              ? "Enter your email and password to access your notes."
+              : "Sign up for free to start organizing your notes."}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -72,11 +97,22 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                minLength={6}
               />
+              {!isLogin && (
+                <Input
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  minLength={6}
+                />
+              )}
             </div>
             {error && <p className="text-sm text-red-500">{error}</p>}
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Please wait..." : (isLogin ? "Login" : "Sign Up")}
+              {isLoading ? "Please wait..." : (isLogin ? "Sign In" : "Get Started")}
             </Button>
           </form>
           <div className="mt-4 text-center text-sm">
@@ -85,10 +121,14 @@ export default function LoginPage() {
             </span>
             <button
               type="button"
-              onClick={() => setIsLogin(!isLogin)}
+              onClick={() => {
+                setIsLogin(!isLogin);
+                setError("");
+                setConfirmPassword("");
+              }}
               className="underline hover:text-primary transition-colors"
             >
-              {isLogin ? "Sign Up" : "Login"}
+              {isLogin ? "Create one" : "Sign in"}
             </button>
           </div>
         </CardContent>

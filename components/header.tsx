@@ -1,19 +1,26 @@
 'use client'
 import Link from 'next/link'
 import { Logo } from '@/components/logo'
-import { Menu, X, Github, Moon } from 'lucide-react'
+import { Menu, X, Moon, Sun } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { useScroll } from 'motion/react'
+import { useTheme } from 'next-themes'
 
 const menuItems: { name: string; href: string }[] = []
 
 export const HeroHeader = () => {
     const [menuState, setMenuState] = React.useState(false)
     const [scrolled, setScrolled] = React.useState(false)
+    const [mounted, setMounted] = React.useState(false)
+    const { theme, setTheme } = useTheme()
 
     const { scrollYProgress } = useScroll()
+
+    React.useEffect(() => {
+        setMounted(true)
+    }, [])
 
     React.useEffect(() => {
         const unsubscribe = scrollYProgress.on('change', (latest) => {
@@ -21,6 +28,10 @@ export const HeroHeader = () => {
         })
         return () => unsubscribe()
     }, [scrollYProgress])
+
+    const toggleTheme = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark')
+    }
 
     return (
         <header>
@@ -65,11 +76,18 @@ export const HeroHeader = () => {
                                 </ul>
                             </div>
                             <div className="flex w-full flex-col items-center space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                                <Link href="#" className="text-muted-foreground hover:text-foreground">
-                                    <Github className="h-5 w-5" />
-                                </Link>
-                                <button className="text-muted-foreground hover:text-foreground">
-                                    <Moon className="h-5 w-5" />
+                                <button
+                                    onClick={toggleTheme}
+                                    className="text-muted-foreground hover:text-foreground p-2 rounded-md hover:bg-accent transition-colors"
+                                    aria-label="Toggle theme"
+                                >
+                                    {mounted && (
+                                        theme === 'dark' ? (
+                                            <Sun className="h-5 w-5" />
+                                        ) : (
+                                            <Moon className="h-5 w-5" />
+                                        )
+                                    )}
                                 </button>
                                 <Button
                                     asChild
@@ -84,9 +102,9 @@ export const HeroHeader = () => {
                                 <Button
                                     asChild
                                     size="sm"
-                                    className="bg-black text-white hover:bg-stone-800 rounded-md px-6"
+                                    className="bg-black text-white hover:bg-stone-800 rounded-md px-6 dark:bg-white dark:text-black dark:hover:bg-stone-200"
                                 >
-                                    <Link href="/login">
+                                    <Link href="/login?mode=signup">
                                         <span>Sign Up</span>
                                     </Link>
                                 </Button>

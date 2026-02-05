@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-//import { ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { TextEffect } from '@/components/ui/text-effect'
@@ -49,7 +48,7 @@ export default function HeroSection() {
                   speedSegment={0.3}
                   as="h1"
                   className="mt-8 max-w-3xl text-balance text-5xl font-bold tracking-tight md:text-6xl lg:mt-16 text-black dark:text-white">
-                  🔥 Forge Smarter Notes. Code Better.
+                  ✍️ Your Notes. Your Way.
                 </TextEffect>
                 <TextEffect
                   per="line"
@@ -58,7 +57,7 @@ export default function HeroSection() {
                   delay={0.5}
                   as="p"
                   className="mt-8 max-w-2xl text-pretty text-lg text-stone-600 dark:text-stone-400">
-                  Supercharge your workflow with NoteForge — the smartest way to capture, organize, and link dev notes, code snippets, and technical insights.
+                  Capture your thoughts, organize your ideas, and access your notes from anywhere. YourNote makes note-taking simple, fast, and beautiful.
                 </TextEffect>
 
                 <AnimatedGroup
@@ -75,18 +74,14 @@ export default function HeroSection() {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   } as any}
                   className="mt-12 flex items-center gap-2">
-                  <div
-                    key={1}
-                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5">
-                    <Button
-                      asChild
-                      size="lg"
-                      className="rounded-full px-8 text-base font-semibold bg-black text-white hover:bg-stone-800 h-12">
-                      <Link href="/notes">
-                        <span className="text-nowrap">Start Forging</span>
-                      </Link>
-                    </Button>
-                  </div>
+                  <Button
+                    asChild
+                    size="lg"
+                    className="rounded-full px-8 text-base font-semibold bg-black text-white hover:bg-stone-800 dark:bg-white dark:text-black dark:hover:bg-stone-200 h-12">
+                    <Link href="/notes">
+                      <span className="text-nowrap">Get Started</span>
+                    </Link>
+                  </Button>
                 </AnimatedGroup>
               </div>
             </div>

@@ -23,6 +23,7 @@ export function NoteEditor({ note, userId, onDelete }: NoteEditorProps) {
   const editor = useEditor({
     extensions: [StarterKit],
     content: note.content,
+    immediatelyRender: false,
     editorProps: {
       attributes: {
         class: "prose prose-stone max-w-none focus:outline-none min-h-[500px]",
