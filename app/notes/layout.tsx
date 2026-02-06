@@ -1,9 +1,12 @@
 "use client";
 
 import { AppSidebar } from "@/components/app-sidebar";
+import { NotesHeader } from "@/components/notes-header";
 import { useAuth } from "@/components/auth-provider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 
 export default function NotesLayout({
   children,
@@ -32,13 +35,16 @@ export default function NotesLayout({
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-white text-stone-900">
-      <aside className="hidden md:flex">
+    <SidebarProvider>
+      <div className="flex bg-stone-50/50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 font-sans w-full min-h-screen overflow-hidden">
         <AppSidebar />
-      </aside>
-      <main className="flex-1 overflow-auto">
-        {children}
-      </main>
-    </div>
+        <SidebarInset className="flex flex-col h-screen overflow-hidden">
+          <NotesHeader />
+          <main className="flex-1 overflow-auto bg-white dark:bg-stone-900 p-6">
+            {children}
+          </main>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
   );
 }

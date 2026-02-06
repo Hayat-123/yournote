@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -41,13 +42,14 @@ export default function LoginPage() {
     try {
       if (isLogin) {
         await signInWithEmailAndPassword(auth, email, password);
+        toast.success("Welcome back!");
       } else {
         await createUserWithEmailAndPassword(auth, email, password);
+        toast.success("Account created successfully!");
       }
       // Redirect to notes page after successful authentication
       router.push("/notes");
     } catch (err: any) {
-      console.error(err);
       if (err.code === "auth/invalid-credential" || err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
         if (isLogin) {
           setError("Invalid email or password. If you don't have an account, click 'Sign Up' below.");
@@ -60,10 +62,14 @@ export default function LoginPage() {
         setError("This email is already registered. Switched to login mode - enter your password to sign in.");
       } else if (err.code === "auth/weak-password") {
         setError("Password is too weak. Please use at least 6 characters.");
-      } else if (err instanceof Error) {
-        setError(err.message);
       } else {
-        setError("An unknown error occurred");
+        // Only log unexpected or unhandled errors to the console
+        console.error("Authentication error:", err);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       }
     } finally {
       setIsLoading(false);
