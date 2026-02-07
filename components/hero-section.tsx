@@ -5,8 +5,9 @@ import Image from 'next/image'
 import { TextEffect } from '@/components/ui/text-effect'
 import { AnimatedGroup } from '@/components/ui/animated-group'
 import { HeroHeader } from './header'
+import { Variants } from 'motion/react'
 
-const transitionVariants = {
+const transitionVariants: { item: Variants } = {
   item: {
     hidden: {
       opacity: 0,
@@ -71,8 +72,7 @@ export default function HeroSection() {
                       },
                     },
                     ...transitionVariants,
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  } as any}
+                  }}
                   className="mt-12 flex items-center gap-2">
                   <Button
                     asChild
@@ -96,8 +96,7 @@ export default function HeroSection() {
                   },
                 },
                 ...transitionVariants,
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              } as any}>
+              }}>
               <div className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
 
                 <div

@@ -229,6 +229,6 @@ export function NoteEditor({ note, userId, onDelete }: NoteEditorProps) {
   );
 }
 
-function cn(...classes: any[]) {
+function cn(...classes: (string | boolean | undefined | null)[]) {
   return classes.filter(Boolean).join(" ");
 }

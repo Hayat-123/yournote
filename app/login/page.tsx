@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 import { auth } from "@/lib/firebase";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -49,27 +50,26 @@ export default function LoginPage() {
       }
       // Redirect to notes page after successful authentication
       router.push("/notes");
-    } catch (err: any) {
-      if (err.code === "auth/invalid-credential" || err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
-        if (isLogin) {
-          setError("Invalid email or password. If you don't have an account, click 'Sign Up' below.");
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        if (err.code === "auth/invalid-credential" || err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
+          if (isLogin) {
+            setError("Invalid email or password. If you don't have an account, click 'Sign Up' below.");
+          } else {
+            setError("Invalid credentials. Please check your email and use a password with at least 6 characters.");
+          }
+        } else if (err.code === "auth/email-already-in-use") {
+          setIsLogin(true);
+          setError("This email is already registered. Switched to login mode - enter your password to sign in.");
+        } else if (err.code === "auth/weak-password") {
+          setError("Password is too weak. Please use at least 6 characters.");
         } else {
-          setError("Invalid credentials. Please check your email and use a password with at least 6 characters.");
-        }
-      } else if (err.code === "auth/email-already-in-use") {
-        // Auto-switch to login mode when email already exists
-        setIsLogin(true);
-        setError("This email is already registered. Switched to login mode - enter your password to sign in.");
-      } else if (err.code === "auth/weak-password") {
-        setError("Password is too weak. Please use at least 6 characters.");
-      } else {
-        // Only log unexpected or unhandled errors to the console
-        console.error("Authentication error:", err);
-        if (err instanceof Error) {
+          console.error("Firebase Auth error:", err);
           setError(err.message);
-        } else {
-          setError("An unknown error occurred");
         }
+      } else {
+        console.error("Unknown authentication error:", err);
+        setError("An unknown error occurred");
       }
     } finally {
       setIsLoading(false);
