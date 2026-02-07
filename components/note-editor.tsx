@@ -5,7 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 
 import { useEffect, useState } from "react";
-import { Note, updateNote, deleteNote } from "@/lib/db";
+import { Note, updateNote } from "@/lib/db";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import {
@@ -33,10 +33,9 @@ import { toast } from "sonner";
 
 interface NoteEditorProps {
   note: Note;
-  onDelete: () => void;
 }
 
-export function NoteEditor({ note, onDelete }: NoteEditorProps) {
+export function NoteEditor({ note }: NoteEditorProps) {
   const [title, setTitle] = useState(note.title);
   const [isSaving, setIsSaving] = useState(false);
 

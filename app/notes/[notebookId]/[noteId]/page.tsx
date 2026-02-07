@@ -71,7 +71,6 @@ export default function NotePage({ params }: { params: Promise<{ notebookId: str
         <div className="flex-1 overflow-auto p-8">
           <NoteEditor
             note={note}
-            onDelete={() => router.push(`/notes/${notebookId}`)}
           />
         </div>
       </div>

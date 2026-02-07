@@ -1,7 +1,6 @@
 "use client";
 
 import { ThemeToggle } from "./theme-toggle";
-import { useAuth } from "./auth-provider";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter, usePathname } from "next/navigation";
