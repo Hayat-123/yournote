@@ -35,5 +35,15 @@ Click **"Deploy"**. Vercel will automatically build and host your Next.js applic
 2. Navigate to **Authentication** -> **Settings** -> **Authorized Domains**.
 3. Add your Vercel deployment URL (e.g., `yournote.vercel.app`) to the list.
 
-## 6. Update Firestore CORS (Optional)
-If you encounter CORS issues with Firestore, ensure your authorized domains in Firebase cover your Vercel URL.
+## Troubleshooting
+
+### Dependency Conflicts (ERESOLVE)
+If your build fails with an `ERESOLVE could not resolve` error during `npm install`:
+1. Go to your **Project Settings** in Vercel.
+2. Navigate to **Environment Variables**.
+3. Add a new variable:
+   - **Key**: `NPM_CONFIG_LEGACY_PEER_DEPS`
+   - **Value**: `true`
+4. Redeploy the project.
+
+This ensures that npm handles peer dependency conflicts (common with React 19) gracefully.
