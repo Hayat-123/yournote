@@ -14,13 +14,11 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { LogOut, LayoutDashboard } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export function NotesHeader() {
-  const { user } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 

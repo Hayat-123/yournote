@@ -1,4 +1,4 @@
-import { db, storage } from "./firebase";
+import { db } from "./firebase";
 import {
   collection,
   addDoc,
@@ -35,7 +35,6 @@ export interface Note {
 
 const NOTES_COLLECTION = "notes";
 const NOTEBOOKS_COLLECTION = "notebooks";
-const IMAGES_COLLECTION = "images";
 
 // Notebook CRUD
 export async function createNotebook(userId: string, name: string) {

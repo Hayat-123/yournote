@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { Notebook, subscribeToNotebooks } from "@/lib/db";
 import { FileText, Search, LayoutDashboard, Notebook as NotebookIcon, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import {
   Sidebar,
   SidebarContent,

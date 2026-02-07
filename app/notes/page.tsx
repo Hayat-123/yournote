@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/components/auth-provider";
 import { Notebook, subscribeToNotebooks, Note, subscribeToNotes } from "@/lib/db";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import { CreateNotebookDialog } from "@/components/create-notebook-dialog";
 import { NotebookCard } from "@/components/notebook-card";
 

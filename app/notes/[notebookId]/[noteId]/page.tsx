@@ -6,7 +6,7 @@ import { Note, subscribeToNote, deleteNote } from "@/lib/db";
 import { NoteEditor } from "@/components/note-editor";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Trash2, ChevronLeft } from "lucide-react";
+import { ChevronLeft, Trash2 } from "lucide-react";
 import { DeleteDialog } from "@/components/delete-dialog";
 import { toast } from "sonner";
 
@@ -71,7 +71,6 @@ export default function NotePage({ params }: { params: Promise<{ notebookId: str
         <div className="flex-1 overflow-auto p-8">
           <NoteEditor
             note={note}
-            userId={user?.uid || ""}
             onDelete={() => router.push(`/notes/${notebookId}`)}
           />
         </div>

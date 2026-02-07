@@ -11,7 +11,6 @@ import { Button } from "./ui/button";
 import {
   Loader2,
   Save,
-  Trash2,
   Bold,
   Italic,
   List,
@@ -34,11 +33,10 @@ import { toast } from "sonner";
 
 interface NoteEditorProps {
   note: Note;
-  userId: string;
   onDelete: () => void;
 }
 
-export function NoteEditor({ note, userId, onDelete }: NoteEditorProps) {
+export function NoteEditor({ note, onDelete }: NoteEditorProps) {
   const [title, setTitle] = useState(note.title);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -71,16 +69,12 @@ export function NoteEditor({ note, userId, onDelete }: NoteEditorProps) {
         content: editor.getHTML(),
       });
       toast.success("Note saved!");
-    } catch (error) {
+    } catch (saveError) {
+      console.error("Save error:", saveError);
       toast.error("Failed to save note.");
     } finally {
       setIsSaving(false);
     }
-  };
-
-  const handleDelete = async () => {
-    await deleteNote(note.id);
-    onDelete();
   };
 
   if (!editor) {

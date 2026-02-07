@@ -3,18 +3,9 @@
 import { Note, deleteNote } from "@/lib/db";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Trash2, ExternalLink } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { DeleteDialog } from "./delete-dialog";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { NoteEditor } from "./note-editor";
-import { useAuth } from "./auth-provider";
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -24,7 +15,6 @@ interface NoteCardProps {
 }
 
 export function NoteCard({ note }: NoteCardProps) {
-  const { user } = useAuth();
   const [deleteOpen, setDeleteOpen] = useState(false);
   const params = useParams();
   const notebookId = params.notebookId as string;
